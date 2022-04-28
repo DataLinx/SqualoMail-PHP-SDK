@@ -1,0 +1,30 @@
+{
+    "name": "datalinx/squalomail-php-sdk",
+    "description": "PHP SDK for SqualoMail",
+    "keywords": ["squalomail", "api", "webservice", "php", "sdk", "slovenia"],
+    "homepage": "https://github.com/datalinx/squalomail-php-sdk",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "DataLinx\\SqualoMail\\": "src/",
+            "DataLinx\\SqualoMail\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Omer Šabić",
+            "email": "omer@datalinx.si"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.4",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "jaschilz/php-coverage-badger": "^2.0"
+    }
+}
