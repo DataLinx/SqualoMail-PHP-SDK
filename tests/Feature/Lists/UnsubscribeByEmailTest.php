@@ -22,7 +22,7 @@ class UnsubscribeByEmailTest extends AbstractTest
         $cr = new CreateRecipient($this->api);
         $cr->email = rand() .'@example.com';
         $cr->list_ids[] = $test_list->id;
-        $cr->send();
+        $test_recipient = $cr->send()->getRecipient();
 
         // Test request
         $request = new UnsubscribeByEmail($this->api);
@@ -35,5 +35,9 @@ class UnsubscribeByEmailTest extends AbstractTest
         $this->assertTrue($response->isSuccessful());
         $this->assertEquals(0, $response->getErrorCode());
         $this->assertNull($response->getErrorMessage());
+
+        // Cleanup
+        $this->deleteTestRecipient($test_recipient->id);
+        $this->deleteTestList($test_list->id);
     }
 }

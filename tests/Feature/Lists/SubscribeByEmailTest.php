@@ -21,7 +21,7 @@ class SubscribeByEmailTest extends AbstractTest
         // Prepare test recipient
         $cr = new CreateRecipient($this->api);
         $cr->email = rand() .'@example.com';
-        $cr->send();
+        $test_recipient = $cr->send()->getRecipient();
 
         // Test request
         $request = new SubscribeByEmail($this->api);
@@ -34,5 +34,9 @@ class SubscribeByEmailTest extends AbstractTest
         $this->assertTrue($response->isSuccessful());
         $this->assertEquals(0, $response->getErrorCode());
         $this->assertNull($response->getErrorMessage());
+
+        // Cleanup
+        $this->deleteTestRecipient($test_recipient->id);
+        $this->deleteTestList($test_list->id);
     }
 }

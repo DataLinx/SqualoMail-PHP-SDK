@@ -35,6 +35,7 @@ class GetRecipientTest extends AbstractTest {
 		$this->assertArrayHasKey('email', $response->getData());
 		$this->assertEquals($test_email, $response->getData()['email']);
 
+        // Cleanup
         $this->deleteTestRecipient($cr_r->getRecipient()->id);
 	}
 

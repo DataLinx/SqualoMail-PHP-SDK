@@ -3,7 +3,6 @@
 namespace DataLinx\SqualoMail\Tests\Feature\Recipients;
 
 use DataLinx\SqualoMail\API;
-use DataLinx\SqualoMail\Exceptions\ValidationException;
 use DataLinx\SqualoMail\Requests\Recipients\CreateRecipient;
 use DataLinx\SqualoMail\Responses\Recipients\CreateRecipientResponse;
 use DataLinx\SqualoMail\Tests\AbstractTest;
@@ -21,6 +20,7 @@ class CreateRecipientTest extends AbstractTest {
 		$request = new CreateRecipient($this->api);
 		$request->email = $test_email;
         $request->name = 'Johnny';
+        $request->ip = '123.123.123.123';
 
 		$response = $request->send();
 
@@ -36,18 +36,11 @@ class CreateRecipientTest extends AbstractTest {
         $this->assertObjectHasAttribute('name', $response->getRecipient());
         $this->assertEquals('Johnny', $response->getRecipient()->name);
 
+        $this->assertObjectHasAttribute('ip', $response->getRecipient());
+        $this->assertEquals($request->ip, $response->getRecipient()->ip);
+
+        // Cleanup
         $this->deleteTestRecipient($response->getRecipient()->id);
 	}
-
-    public function testValidation()
-    {
-        $request = new CreateRecipient($this->api);
-
-        $this->expectException(ValidationException::class);
-        $this->expectExceptionCode(ValidationException::CODE_ATTR_REQUIRED);
-        $this->expectExceptionMessage('Attribute "email" is required');
-
-        $request->validate();
-    }
 
 }

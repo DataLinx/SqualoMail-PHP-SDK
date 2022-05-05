@@ -73,6 +73,11 @@ class CreateRecipient extends AbstractRequest {
 	 */
 	public ?array $custom_attributes;
 
+    /**
+     * @var string|null IP from which the recipient submitted the request
+     */
+    public ?string $ip;
+
 	/**
 	 * @inheritDoc
 	 */
@@ -101,6 +106,7 @@ class CreateRecipient extends AbstractRequest {
             'gdpr_can_send' => 'gdprCanSend',
             'gdpr_can_track' => 'gdprCanTrack',
             'custom_attributes' => 'customAttributes',
+            'ip',
         ]);
 	}
 

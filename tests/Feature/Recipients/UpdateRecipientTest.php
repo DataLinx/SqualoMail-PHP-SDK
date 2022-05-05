@@ -42,6 +42,7 @@ class UpdateRecipientTest extends AbstractTest
         $this->assertObjectHasAttribute('surname', $response->getRecipient());
         $this->assertEquals('Delonghi', $response->getRecipient()->surname);
 
+        // Cleanup
         $this->deleteTestRecipient($cr_r->getRecipient()->id);
     }
 
