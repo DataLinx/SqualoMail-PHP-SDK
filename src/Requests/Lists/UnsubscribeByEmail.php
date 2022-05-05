@@ -56,6 +56,6 @@ class UnsubscribeByEmail extends AbstractRequest
      */
     public function send(): CommonResponse
     {
-        return new CommonResponse($this->sendRequest(), $this);
+        return new CommonResponse($this->sendRequest(true), $this);
     }
 }

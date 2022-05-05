@@ -66,7 +66,7 @@ class GetRecipientLists extends AbstractRequest
                 $recipient = $gr->send()->getData();
 
                 if (empty($recipient['subid'])) {
-                    throw new Exception('subId empty');
+                    throw new Exception('subid empty');
                 }
 
                 $recipient_id = $recipient['subid'];

@@ -12,6 +12,8 @@
 
 With this package you can use the SqualoMail API in your PHP project. 
 
+See the changelog [here](CHANGELOG.md).
+
 ## Requirements
 - PHP >= 7.4
 - CURL and JSON PHP extensions
@@ -27,7 +29,7 @@ composer require datalinx/squalomail-php-sdk
 $api = new API('your API key here');
 
 $request = new CreateRecipient($api);
-$request->email = $test_email;
+$request->email = 'john@example.com';
 $request->name = 'John';
 $request->surname = 'Doe';
 
