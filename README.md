@@ -56,8 +56,9 @@ However, only the following are implemented in this package currently.
 | Get recipient's lists | See the `GetRecipientLists` class docblock for explanation.                                                                                 |
 | Update recipient      | You can provide either the recipient ID or the email. If you provide both, the email address for the matching recipient ID will be updated. |
 | Delete recipient      | You can delete recipients only by ID, so fetch the ID with a `GetRecipient` request first.                                                  |
-| Create list           |                                                                                                                                             |
+| Create list           | Adding tags does not work, issue raised with Squalomail support                                                                             |
 | Delete list           |                                                                                                                                             |
+| Get list              | See the `GetList::send()` method docblock for the response data                                                                             |
 | Get list recipients   | Does not support pagination                                                                                                                 |
 | Subscribe by email    | This works only for recipients that are already created.                                                                                    |
 | Unsubscribe by email  |                                                                                                                                             |
