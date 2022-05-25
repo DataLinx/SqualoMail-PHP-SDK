@@ -55,7 +55,7 @@ class CommonResponse implements ResponseInterface {
      * @param string $name Parameter name
      * @return mixed|null
      */
-    protected function getParameter(string $name)
+    public function getParameter(string $name)
     {
         return $this->data[$name] ?? null;
     }

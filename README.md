@@ -60,6 +60,7 @@ However, only the following are implemented in this package currently.
 | Delete list           |                                                                                                                                             |
 | Get list              | See the `GetList::send()` method docblock for the response data                                                                             |
 | Get list recipients   | Does not support pagination                                                                                                                 |
+| Get lists details     |                                                                                                                                             |
 | Subscribe by email    | This works only for recipients that are already created.                                                                                    |
 | Unsubscribe by email  |                                                                                                                                             |
 
