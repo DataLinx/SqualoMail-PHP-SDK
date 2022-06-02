@@ -12,9 +12,10 @@ class CreateListTest extends AbstractTest
     public function testBasic()
     {
         $request = new CreateList($this->api);
-        $request->name = 'Test list';
+        $request->name = 'PHPUnit Test list';
         $request->published = true;
         $request->description = 'Just a test list';
+        $request->list_tags[] = 'Test tag';
 
         $response = $request->send();
 
@@ -24,11 +25,17 @@ class CreateListTest extends AbstractTest
         $this->assertNull($response->getErrorMessage());
         $this->assertIsObject($response->getList());
 
-        $this->assertObjectHasAttribute('name', $response->getList());
-        $this->assertEquals('Test list', $response->getList()->name);
+        $list = $response->getList();
+
+        $this->assertObjectHasAttribute('name', $list);
+        $this->assertEquals('PHPUnit Test list', $list->name);
+
+        $this->assertObjectHasAttribute('listTags', $list);
+        $this->assertIsArray($list->listTags);
+        $this->assertContains('Test tag', $list->listTags);
 
         // Cleanup
-        $this->deleteTestList($response->getList()->id);
+        $this->deleteTestList($list->id);
     }
 
     public function testValidation()

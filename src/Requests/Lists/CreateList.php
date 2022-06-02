@@ -20,9 +20,9 @@ class CreateList extends AbstractRequest
     public ?string $description;
 
     /**
-     * @var string|null List tag/category
+     * @var string[]|null List tags/categories
      */
-    public ?string $list_tag;
+    public ?array $list_tags;
 
     /**
      * @var string|null Color in HEX code
@@ -58,7 +58,7 @@ class CreateList extends AbstractRequest
         return $this->readAttributes([
             'name',
             'description',
-            'list_tag' => 'listTag',
+            'list_tags' => 'listTags',
             'color',
             'ordering',
             'published',
