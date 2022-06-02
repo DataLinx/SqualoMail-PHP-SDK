@@ -20,6 +20,11 @@ class SubscribeByEmail extends AbstractRequest
     public array $list_ids;
 
     /**
+     * @var bool|null Set the "accept" parameter, which is not set by default. You probably always want to send "true" here.
+     */
+    public ?bool $accept;
+
+    /**
      * @inheritDoc
      */
     public function validate(): void
@@ -35,10 +40,16 @@ class SubscribeByEmail extends AbstractRequest
      */
     public function getData(): array
     {
-        return $this->readAttributes([
+        $data = $this->readAttributes([
             'email',
             'list_ids' => 'listIds',
         ]);
+
+        if (isset($this->accept)) {
+            $data['accept'] = (int)$this->accept;
+        }
+
+        return $data;
     }
 
     /**

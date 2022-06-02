@@ -20,6 +20,14 @@ class UnsubscribeByEmail extends AbstractRequest
     public array $list_ids;
 
     /**
+     * Set the "accept" parameter, which is not set by default, but is configured in SqualoMail settings. However, you can (mostly) force a value here.<br/>
+     * The "accept" attribute on the recipient is updated considering how you configured it in SqualoMail settings (Slovenian: "Po kliku na povezavo za odjavo naj prejemnika odjavi od"). You can send a boolean here to force a change, but it will be ignored when the setting is set to the third option (Slovenian: "Prejemanja katerihkoli sporočil v prihodnje").
+     *
+     * @var bool|null
+     */
+    public ?bool $accept;
+
+    /**
      * @inheritDoc
      */
     public function validate(): void
@@ -35,10 +43,16 @@ class UnsubscribeByEmail extends AbstractRequest
      */
     public function getData(): array
     {
-        return $this->readAttributes([
+        $data = $this->readAttributes([
             'email',
             'list_ids' => 'listIds',
         ]);
+
+        if (isset($this->accept)) {
+            $data['accept'] = (int)$this->accept;
+        }
+
+        return $data;
     }
 
     /**
