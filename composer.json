@@ -7,14 +7,18 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "DataLinx\\SqualoMail\\": "src/",
+            "DataLinx\\SqualoMail\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "DataLinx\\SqualoMail\\Tests\\": "tests/"
         }
     },
     "authors": [
         {
-            "name": "Omer Šabić",
-            "email": "omer@datalinx.si"
+            "name": "DataLinx",
+            "email": "info@datalinx.si"
         }
     ],
     "minimum-stability": "stable",
