@@ -19,6 +19,10 @@ class UpdateRecipientTest extends AbstractTest
         $cr->email = $test_email;
         $cr->name = 'Johnny';
         $cr->surname = 'Shmoxville';
+        $cr->custom_attributes = [[
+            'name' => 'custom_attribute',
+            'value' => 'Test value',
+        ]];
 
         $cr_r = $cr->send();
 
@@ -27,6 +31,10 @@ class UpdateRecipientTest extends AbstractTest
         $request->email = $test_email;
         $request->name = 'Riccardo';
         $request->surname = 'Delonghi';
+        $request->custom_attributes = [[
+            'name' => 'custom_attribute',
+            'value' => 'Some other value',
+        ]];
 
         $response = $request->send();
 
@@ -41,6 +49,8 @@ class UpdateRecipientTest extends AbstractTest
 
         $this->assertObjectHasAttribute('surname', $response->getRecipient());
         $this->assertEquals('Delonghi', $response->getRecipient()->surname);
+
+        // API does not return the custom attributes when updating, so we can't test it
 
         // Cleanup
         $this->deleteTestRecipient($cr_r->getRecipient()->id);

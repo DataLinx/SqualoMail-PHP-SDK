@@ -60,7 +60,19 @@ class UpdateRecipient extends AbstractRequest
     public ?bool $accept;
 
     /**
-     * @var array|null Additional key-value pairs for custom attributes
+     * A 2-d array of custom attributes in the format:
+     *
+     * <code>
+     *      [[
+     *          'name' => 'attr_name',
+     *          'value' => 'Attribute value',
+     *      ], [
+     *          'name' => 'other_attr_name',
+     *          'value' => 'Some other value',
+     *      ]]
+     * </code>
+     *
+     * @var array|null
      */
     public ?array $custom_attributes;
 

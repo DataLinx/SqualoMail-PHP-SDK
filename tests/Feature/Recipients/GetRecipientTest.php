@@ -17,6 +17,10 @@ class GetRecipientTest extends AbstractTest {
 
 		$cr = new CreateRecipient($this->api);
 		$cr->email = $test_email;
+        $cr->custom_attributes = [[
+            'name' => 'custom_attribute',
+            'value' => 'Test value',
+        ]];
 
 		$cr_r = $cr->send();
 
@@ -34,6 +38,18 @@ class GetRecipientTest extends AbstractTest {
 		$this->assertIsArray($response->getData());
 		$this->assertArrayHasKey('email', $response->getData());
 		$this->assertEquals($test_email, $response->getData()['email']);
+
+        // Assert custom attributes
+        $data = $response->getData();
+        $this->assertArrayHasKey('user_defined_fields', $data);
+        $this->assertIsArray($data['user_defined_fields']);
+        $this->assertCount(1, $data['user_defined_fields']);
+        $attr = $data['user_defined_fields'][0];
+        $this->assertIsArray($attr);
+        $this->assertArrayHasKey('Key', $attr);
+        $this->assertEquals('custom_attribute', $attr['Key']);
+        $this->assertArrayHasKey('Value', $attr);
+        $this->assertEquals('Test value', $attr['Value']);
 
         // Cleanup
         $this->deleteTestRecipient($cr_r->getRecipient()->id);

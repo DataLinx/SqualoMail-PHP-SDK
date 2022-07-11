@@ -9,6 +9,7 @@ use DataLinx\SqualoMail\Responses\EntityResponse;
 /**
  * Recipient data is returned as an object. Example:
  *
+ * <code>
  * {
     "__type": "AcymailingSubscriber:#SqualoMail.Data.ApplicationDatabase.Models",
     "accept": 1,
@@ -31,15 +32,23 @@ use DataLinx\SqualoMail\Responses\EntityResponse;
     "lastopen_ip": null,
     "lastsent_date": 0,
     "name": "",
-    "name_imported_value": "",
+    "name_imported_value": " ",
     "needs_gdpr_consent": 1,
     "phone": null,
     "quality_score": 0,
     "source": "SYSTEM_API",
     "subid": 65,
     "surname": "",
+    "tags": [],
+    "user_defined_fields": [
+    {
+        "Key": "custom_attribute",
+        "Value": "Test value"
+    }
+    ],
     "userid": 0
     }
+ * </code>
  */
 class GetRecipient extends AbstractRequest {
 

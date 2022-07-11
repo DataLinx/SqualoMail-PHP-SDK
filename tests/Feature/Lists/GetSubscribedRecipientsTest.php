@@ -22,6 +22,10 @@ class GetSubscribedRecipientsTest extends AbstractTest
         $cr = new CreateRecipient($this->api);
         $cr->email = rand() .'@example.com';
         $cr->list_ids = [$test_list->id];
+        $cr->custom_attributes = [[
+            'name' => 'custom_attribute',
+            'value' => 'Test value',
+        ]];
         $test_recipient = $cr->send()->getRecipient();
 
         // Test recipients
@@ -39,9 +43,23 @@ class GetSubscribedRecipientsTest extends AbstractTest
 
         $this->assertIsArray($recipients);
         $this->assertCount(1, $recipients);
-        $this->assertIsArray($recipients[0]);
-        $this->assertArrayHasKey('email', $recipients[0]);
-        $this->assertEquals($cr->email, $recipients[0]['email']);
+
+        $data = $recipients[0];
+
+        $this->assertIsArray($data);
+        $this->assertArrayHasKey('email', $data);
+        $this->assertEquals($cr->email, $data['email']);
+
+        // Assert custom attributes
+        $this->assertArrayHasKey('customAttributes', $data);
+        $this->assertIsArray($data['customAttributes']);
+        $this->assertCount(1, $data['customAttributes']);
+        $attr = $data['customAttributes'][0];
+        $this->assertIsArray($attr);
+        $this->assertArrayHasKey('name', $attr);
+        $this->assertEquals('custom_attribute', $attr['name']);
+        $this->assertArrayHasKey('value', $attr);
+        $this->assertEquals('Test value', $attr['value']);
 
         // Cleanup
         $this->deleteTestRecipient($test_recipient->id);

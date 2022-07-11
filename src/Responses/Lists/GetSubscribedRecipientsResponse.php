@@ -7,14 +7,21 @@ use DataLinx\SqualoMail\Responses\CommonResponse;
 class GetSubscribedRecipientsResponse extends CommonResponse
 {
     /**
-     * Get an 2-d array for recipient records. Example record:
+     * Get a 2-d array for recipient records. Example record:
+     *
+     * <code>
      * [
      *      "accept": true,
             "confirmed": false,
             "confirmedDate": 0,
             "confirmedIp": null,
             "created": 1650959846,
-            "customAttributes": null,
+            "customAttributes": [
+                {
+                    "name": "custom_attribute",
+                    "value": "Test value"
+                }
+            ],
             "email": "test@example.com",
             "enabled": true,
             "html": true,
@@ -29,6 +36,8 @@ class GetSubscribedRecipientsResponse extends CommonResponse
             "surname": "",
             "userId": 0
      * ]
+     * </code>
+     *
      * @return array
      */
     public function getRecipients()

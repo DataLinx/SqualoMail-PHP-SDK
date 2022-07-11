@@ -21,6 +21,10 @@ class CreateRecipientTest extends AbstractTest {
 		$request->email = $test_email;
         $request->name = 'Johnny';
         $request->ip = '123.123.123.123';
+        $request->custom_attributes = [[
+            'name' => 'custom_attribute',
+            'value' => 'Test value',
+        ]];
 
 		$response = $request->send();
 
@@ -38,6 +42,19 @@ class CreateRecipientTest extends AbstractTest {
 
         $this->assertObjectHasAttribute('ip', $response->getRecipient());
         $this->assertEquals($request->ip, $response->getRecipient()->ip);
+
+        // Assert custom attributes
+        $this->assertObjectHasAttribute('customAttributes', $response->getRecipient());
+        $this->assertIsArray($response->getRecipient()->customAttributes);
+
+        $custom_attrs = $response->getRecipient()->customAttributes;
+        $this->assertCount(1, $custom_attrs);
+        $attr = $custom_attrs[0];
+        $this->assertIsArray($attr);
+        $this->assertArrayHasKey('name', $attr);
+        $this->assertEquals('custom_attribute', $attr['name']);
+        $this->assertArrayHasKey('value', $attr);
+        $this->assertEquals('Test value', $attr['value']);
 
         // Cleanup
         $this->deleteTestRecipient($response->getRecipient()->id);
