@@ -50,7 +50,18 @@ class UpdateRecipientTest extends AbstractTest
         $this->assertObjectHasAttribute('surname', $response->getRecipient());
         $this->assertEquals('Delonghi', $response->getRecipient()->surname);
 
-        // API does not return the custom attributes when updating, so we can't test it
+        // Assert custom attributes
+        $this->assertObjectHasAttribute('customAttributes', $response->getRecipient());
+        $this->assertIsArray($response->getRecipient()->customAttributes);
+
+        $custom_attrs = $response->getRecipient()->customAttributes;
+        $this->assertCount(1, $custom_attrs);
+        $attr = $custom_attrs[0];
+        $this->assertIsArray($attr);
+        $this->assertArrayHasKey('name', $attr);
+        $this->assertEquals('custom_attribute', $attr['name']);
+        $this->assertArrayHasKey('value', $attr);
+        $this->assertEquals('Some other value', $attr['value']);
 
         // Cleanup
         $this->deleteTestRecipient($cr_r->getRecipient()->id);
