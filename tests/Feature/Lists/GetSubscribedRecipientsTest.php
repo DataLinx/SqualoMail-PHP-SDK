@@ -53,7 +53,7 @@ class GetSubscribedRecipientsTest extends AbstractTest
         // Assert custom attributes
         $this->assertArrayHasKey('customAttributes', $data);
         $this->assertIsArray($data['customAttributes']);
-        $this->assertCount(1, $data['customAttributes']);
+        $this->assertGreaterThan(0, count($data['customAttributes']));
         $attr = $data['customAttributes'][0];
         $this->assertIsArray($attr);
         $this->assertArrayHasKey('name', $attr);

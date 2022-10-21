@@ -43,7 +43,7 @@ class GetRecipientTest extends AbstractTest {
         $data = $response->getData();
         $this->assertArrayHasKey('user_defined_fields', $data);
         $this->assertIsArray($data['user_defined_fields']);
-        $this->assertCount(1, $data['user_defined_fields']);
+        $this->assertGreaterThan(0, count($data['user_defined_fields']));
         $attr = $data['user_defined_fields'][0];
         $this->assertIsArray($attr);
         $this->assertArrayHasKey('Key', $attr);
