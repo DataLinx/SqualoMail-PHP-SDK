@@ -13,6 +13,7 @@ use DataLinx\SqualoMail\Responses\EntityResponse;
  * {
     "__type": "AcymailingSubscriber:#SqualoMail.Data.ApplicationDatabase.Models",
     "accept": 1,
+    "accept_sms": 1,
     "confirmed": 1,
     "confirmed_date": 1651057685,
     "confirmed_ip": null,
@@ -39,11 +40,17 @@ use DataLinx\SqualoMail\Responses\EntityResponse;
     "source": "SYSTEM_API",
     "subid": 65,
     "surname": "",
-    "tags": [],
+    "tags": [
+        "test tag 2"
+    ],
     "user_defined_fields": [
     {
         "Key": "custom_attribute",
         "Value": "Test value"
+    },
+    {
+        "Key": "enabled_sms",
+        "Value": ""
     }
     ],
     "userid": 0

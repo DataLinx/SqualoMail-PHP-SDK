@@ -77,6 +77,13 @@ class UpdateRecipient extends AbstractRequest
     public ?array $custom_attributes;
 
     /**
+     * An array of tags (plain strings)
+     *
+     * @var string[]|null
+     */
+    public ?array $tags;
+
+    /**
      * @inheritDoc
      */
     public function validate(): void
@@ -102,6 +109,7 @@ class UpdateRecipient extends AbstractRequest
             'enabled',
             'accept',
             'custom_attributes' => 'customAttributes',
+            'tags',
         ]);
     }
 

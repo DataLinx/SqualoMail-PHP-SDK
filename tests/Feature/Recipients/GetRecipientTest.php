@@ -21,6 +21,8 @@ class GetRecipientTest extends AbstractTest {
             'name' => 'custom_attribute',
             'value' => 'Test value',
         ]];
+        $cr->tags[] = 'Unit test tag 1';
+        $cr->tags[] = 'Unit test tag 2';
 
 		$cr_r = $cr->send();
 
@@ -50,6 +52,11 @@ class GetRecipientTest extends AbstractTest {
         $this->assertEquals('custom_attribute', $attr['Key']);
         $this->assertArrayHasKey('Value', $attr);
         $this->assertEquals('Test value', $attr['Value']);
+
+        // Assert tags
+        $this->assertArrayHasKey('tags', $data);
+        $this->assertIsArray($data['tags']);
+        $this->assertEquals(['Unit test tag 1', 'Unit test tag 2'], $data['tags']);
 
         // Cleanup
         $this->deleteTestRecipient($cr_r->getRecipient()->id);

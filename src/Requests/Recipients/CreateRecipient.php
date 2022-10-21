@@ -90,6 +90,13 @@ class CreateRecipient extends AbstractRequest {
      */
     public ?string $ip;
 
+    /**
+     * An array of tags (plain strings)
+     *
+     * @var string[]|null
+     */
+    public ?array $tags;
+
 	/**
 	 * @inheritDoc
 	 */
@@ -119,6 +126,7 @@ class CreateRecipient extends AbstractRequest {
             'gdpr_can_track' => 'gdprCanTrack',
             'custom_attributes' => 'customAttributes',
             'ip',
+            'tags',
         ]);
 	}
 
