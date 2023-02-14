@@ -20,7 +20,7 @@ class GetSubscribedRecipientsTest extends AbstractTest
 
         // Prepare test recipient
         $cr = new CreateRecipient($this->api);
-        $cr->email = rand() .'@example.com';
+        $cr->email = mt_rand() .'@example.com';
         $cr->list_ids = [$test_list->id];
         $cr->custom_attributes = [[
             'name' => 'custom_attribute',
@@ -54,7 +54,8 @@ class GetSubscribedRecipientsTest extends AbstractTest
         $this->assertArrayHasKey('customAttributes', $data);
         $this->assertIsArray($data['customAttributes']);
         $this->assertGreaterThan(0, count($data['customAttributes']));
-        $attr = $data['customAttributes'][0];
+
+        $attr = end($data['customAttributes']);
         $this->assertIsArray($attr);
         $this->assertArrayHasKey('name', $attr);
         $this->assertEquals('custom_attribute', $attr['name']);

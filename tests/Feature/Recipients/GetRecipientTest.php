@@ -13,7 +13,7 @@ class GetRecipientTest extends AbstractTest
     public function testBasic()
     {
         // First, create the test object
-        $test_email = rand() .'@example.com';
+        $test_email = mt_rand() .'@example.com';
 
         $cr = new CreateRecipient($this->api);
         $cr->email = $test_email;
@@ -46,7 +46,7 @@ class GetRecipientTest extends AbstractTest
         $this->assertArrayHasKey('user_defined_fields', $data);
         $this->assertIsArray($data['user_defined_fields']);
         $this->assertGreaterThan(0, count($data['user_defined_fields']));
-        $attr = $data['user_defined_fields'][0];
+        $attr = end($data['user_defined_fields']);
         $this->assertIsArray($attr);
         $this->assertArrayHasKey('Key', $attr);
         $this->assertEquals('custom_attribute', $attr['Key']);
