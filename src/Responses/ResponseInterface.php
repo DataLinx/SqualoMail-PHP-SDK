@@ -5,14 +5,14 @@ namespace DataLinx\SqualoMail\Responses;
 /**
  * Interface that each API response should implement
  */
-interface ResponseInterface {
-
-	/**
-	 * Was the request successful?
-	 *
-	 * @return bool
-	 */
-	public function isSuccessful(): bool;
+interface ResponseInterface
+{
+    /**
+     * Was the request successful?
+     *
+     * @return bool
+     */
+    public function isSuccessful(): bool;
 
     /**
      * Get error code
@@ -27,5 +27,4 @@ interface ResponseInterface {
      * @return string|null
      */
     public function getErrorMessage(): ?string;
-
 }

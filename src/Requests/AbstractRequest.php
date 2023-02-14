@@ -9,8 +9,8 @@ use DataLinx\SqualoMail\Exceptions\ValidationException;
 /**
  * Abstract request class that all requests should extend
  */
-abstract class AbstractRequest implements RequestInterface {
-
+abstract class AbstractRequest implements RequestInterface
+{
     /**
      * API instance
      *
@@ -31,7 +31,7 @@ abstract class AbstractRequest implements RequestInterface {
     /**
      * Send request via API
      *
-	 * @param bool $post Make a POST request with a JSON body
+     * @param bool $post Make a POST request with a JSON body
      * @return array
      * @throws APIException
      * @throws ValidationException

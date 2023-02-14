@@ -4,14 +4,14 @@ namespace DataLinx\SqualoMail\Responses\Recipients;
 
 use DataLinx\SqualoMail\Responses\CommonResponse;
 
-class UpdateRecipientResponse extends CommonResponse {
-
-	/**
-	 * Get updated recipient - a generic object cast from JSON.
-	 * Example:
-	 *
+class UpdateRecipientResponse extends CommonResponse
+{
+    /**
+     * Get updated recipient - a generic object cast from JSON.
+     * Example:
+     *
      * <code>
-	 * {
+     * {
         "accept": true,
         "confirmed": true,
         "confirmedDate": 1657522018,
@@ -40,13 +40,13 @@ class UpdateRecipientResponse extends CommonResponse {
             "Test tag 1"
         ],
         "userId": 0
-		}
+        }
      * </code>
-	 *
-	 * @return object
-	 */
-	public function getRecipient(): object
-	{
-		return (object)$this->getParameter('recipient');
-	}
+     *
+     * @return object
+     */
+    public function getRecipient(): object
+    {
+        return (object)$this->getParameter('recipient');
+    }
 }

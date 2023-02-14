@@ -7,6 +7,6 @@ use Exception;
 /**
  * SqualoMail API exception
  */
-class APIException extends Exception {
-
+class APIException extends Exception
+{
 }

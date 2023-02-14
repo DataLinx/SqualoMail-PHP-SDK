@@ -8,15 +8,15 @@ use DataLinx\SqualoMail\Requests\Recipients\GetRecipient;
 use DataLinx\SqualoMail\Responses\EntityResponse;
 use DataLinx\SqualoMail\Tests\AbstractTest;
 
-class GetRecipientTest extends AbstractTest {
+class GetRecipientTest extends AbstractTest
+{
+    public function testBasic()
+    {
+        // First, create the test object
+        $test_email = rand() .'@example.com';
 
-	public function testBasic()
-	{
-		// First, create the test object
-		$test_email = rand() .'@example.com';
-
-		$cr = new CreateRecipient($this->api);
-		$cr->email = $test_email;
+        $cr = new CreateRecipient($this->api);
+        $cr->email = $test_email;
         $cr->custom_attributes = [[
             'name' => 'custom_attribute',
             'value' => 'Test value',
@@ -24,22 +24,22 @@ class GetRecipientTest extends AbstractTest {
         $cr->tags[] = 'Unit test tag 1';
         $cr->tags[] = 'Unit test tag 2';
 
-		$cr_r = $cr->send();
+        $cr_r = $cr->send();
 
-		// Second, attempt to fetch the record
-		$request = new GetRecipient($this->api);
-		$request->email = $test_email;
+        // Second, attempt to fetch the record
+        $request = new GetRecipient($this->api);
+        $request->email = $test_email;
 
-		$response = $request->send();
+        $response = $request->send();
 
-		$this->assertInstanceOf(EntityResponse::class, $response);
-		$this->assertTrue($response->isSuccessful());
-		$this->assertNull($response->getErrorCode());
-		$this->assertNull($response->getErrorMessage());
+        $this->assertInstanceOf(EntityResponse::class, $response);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertNull($response->getErrorCode());
+        $this->assertNull($response->getErrorMessage());
         $this->assertInstanceOf(GetRecipient::class, $response->getRequest());
-		$this->assertIsArray($response->getData());
-		$this->assertArrayHasKey('email', $response->getData());
-		$this->assertEquals($test_email, $response->getData()['email']);
+        $this->assertIsArray($response->getData());
+        $this->assertArrayHasKey('email', $response->getData());
+        $this->assertEquals($test_email, $response->getData()['email']);
 
         // Assert custom attributes
         $data = $response->getData();
@@ -60,7 +60,7 @@ class GetRecipientTest extends AbstractTest {
 
         // Cleanup
         $this->deleteTestRecipient($cr_r->getRecipient()->id);
-	}
+    }
 
     public function testNonExisting()
     {

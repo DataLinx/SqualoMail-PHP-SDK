@@ -7,16 +7,16 @@ use DataLinx\SqualoMail\Requests\Lists\DeleteList;
 use DataLinx\SqualoMail\Requests\Recipients\DeleteRecipient;
 use PHPUnit\Framework\TestCase;
 
-class AbstractTest extends TestCase {
+class AbstractTest extends TestCase
+{
+    protected API $api;
 
-	protected API $api;
+    public function setUp(): void
+    {
+        parent::setUp();
 
-	public function setUp(): void
-	{
-		parent::setUp();
-
-		$this->api = new API(getenv('squalomail.api_key'));
-	}
+        $this->api = new API(getenv('squalomail.api_key'));
+    }
 
     /**
      * Delete the recipient that was created by the test
@@ -45,5 +45,4 @@ class AbstractTest extends TestCase {
         $request->id = $id;
         $request->send();
     }
-
 }

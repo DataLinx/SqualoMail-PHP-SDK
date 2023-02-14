@@ -88,7 +88,7 @@ class UpdateRecipient extends AbstractRequest
      */
     public function validate(): void
     {
-        if ( ! isset($this->id) and ! isset($this->email)) {
+        if (! isset($this->id) and ! isset($this->email)) {
             throw new ValidationException(['id', 'email'], ValidationException::CODE_ATTR_EITHER_REQUIRED);
         }
     }

@@ -7,8 +7,8 @@ use DataLinx\SqualoMail\Requests\RequestInterface;
 /**
  * A common response, possibly providing some data and/or error details
  */
-class CommonResponse implements ResponseInterface {
-
+class CommonResponse implements ResponseInterface
+{
     /**
      * @var array Data as received by the API
      */

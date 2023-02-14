@@ -5,7 +5,6 @@ namespace DataLinx\SqualoMail\Requests\Lists;
 use DataLinx\SqualoMail\Exceptions\ValidationException;
 use DataLinx\SqualoMail\Requests\AbstractRequest;
 use DataLinx\SqualoMail\Responses\EntityResponse;
-use DataLinx\SqualoMail\Responses\ResponseInterface;
 
 class GetList extends AbstractRequest
 {

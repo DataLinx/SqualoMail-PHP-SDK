@@ -4,12 +4,12 @@ namespace DataLinx\SqualoMail\Responses\Recipients;
 
 use DataLinx\SqualoMail\Responses\CommonResponse;
 
-class CreateRecipientResponse extends CommonResponse {
-
-	/**
-	 * Get created recipient - a generic object cast from JSON.
-	 * Example:
-	 *
+class CreateRecipientResponse extends CommonResponse
+{
+    /**
+     * Get created recipient - a generic object cast from JSON.
+     * Example:
+     *
      * <code>
      * {
             "accept": true,
@@ -40,13 +40,13 @@ class CreateRecipientResponse extends CommonResponse {
                 "test tag 2"
             ],
             "userId": 0
-		}
+        }
      * </code>
      *
-	 * @return object
-	 */
-	public function getRecipient(): object
-	{
-		return (object)$this->getParameter('recipient');
-	}
+     * @return object
+     */
+    public function getRecipient(): object
+    {
+        return (object)$this->getParameter('recipient');
+    }
 }

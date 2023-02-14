@@ -57,46 +57,46 @@ use DataLinx\SqualoMail\Responses\EntityResponse;
     }
  * </code>
  */
-class GetRecipient extends AbstractRequest {
+class GetRecipient extends AbstractRequest
+{
+    public string $email;
 
-	public string $email;
-
-	/**
-	 * @inheritDoc
-	 */
-	public function validate(): void
-	{
+    /**
+     * @inheritDoc
+     */
+    public function validate(): void
+    {
         $this->validateAttributes([
             'email',
         ]);
-	}
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getData(): array
-	{
-		return [
-			'entity' => 'recipient',
-			'filter' => 'email=="'. $this->email .'"',
-		];
-	}
+    /**
+     * @inheritDoc
+     */
+    public function getData(): array
+    {
+        return [
+            'entity' => 'recipient',
+            'filter' => 'email=="'. $this->email .'"',
+        ];
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getEndpoint(): string
-	{
-		return 'get-data';
-	}
+    /**
+     * @inheritDoc
+     */
+    public function getEndpoint(): string
+    {
+        return 'get-data';
+    }
 
-	/**
-	 * @return EntityResponse
-	 * @throws ValidationException
-	 * @throws \DataLinx\SqualoMail\Exceptions\APIException
-	 */
-	public function send(): EntityResponse
-	{
-		return new EntityResponse($this->sendRequest(), $this);
-	}
+    /**
+     * @return EntityResponse
+     * @throws ValidationException
+     * @throws \DataLinx\SqualoMail\Exceptions\APIException
+     */
+    public function send(): EntityResponse
+    {
+        return new EntityResponse($this->sendRequest(), $this);
+    }
 }
