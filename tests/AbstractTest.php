@@ -3,6 +3,8 @@
 namespace DataLinx\SqualoMail\Tests;
 
 use DataLinx\SqualoMail\API;
+use DataLinx\SqualoMail\Exceptions\APIException;
+use DataLinx\SqualoMail\Exceptions\ValidationException;
 use DataLinx\SqualoMail\Requests\Lists\DeleteList;
 use DataLinx\SqualoMail\Requests\Recipients\DeleteRecipient;
 use PHPUnit\Framework\TestCase;
@@ -24,7 +26,7 @@ class AbstractTest extends TestCase
      * @param int $id
      * @return void
      */
-    protected function deleteTestRecipient(int $id)
+    protected function deleteTestRecipient(int $id): void
     {
         $request = new DeleteRecipient($this->api);
         $request->id = $id;
@@ -36,10 +38,10 @@ class AbstractTest extends TestCase
      *
      * @param int $id
      * @return void
-     * @throws \DataLinx\SqualoMail\Exceptions\APIException
-     * @throws \DataLinx\SqualoMail\Exceptions\ValidationException
+     * @throws APIException
+     * @throws ValidationException
      */
-    protected function deleteTestList(int $id)
+    protected function deleteTestList(int $id): void
     {
         $request = new DeleteList($this->api);
         $request->id = $id;

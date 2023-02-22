@@ -2,6 +2,8 @@
 
 namespace DataLinx\SqualoMail\Tests\Feature\Lists;
 
+use DataLinx\SqualoMail\Exceptions\APIException;
+use DataLinx\SqualoMail\Exceptions\ValidationException;
 use DataLinx\SqualoMail\Requests\Lists\CreateList;
 use DataLinx\SqualoMail\Requests\Lists\UnsubscribeByEmail;
 use DataLinx\SqualoMail\Requests\Recipients\CreateRecipient;
@@ -11,7 +13,11 @@ use DataLinx\SqualoMail\Tests\AbstractTest;
 
 class UnsubscribeByEmailTest extends AbstractTest
 {
-    public function testBasic()
+    /**
+     * @throws ValidationException
+     * @throws APIException
+     */
+    public function testBasic(): void
     {
         // Prepare test list
         $cl = new CreateList($this->api);
@@ -42,7 +48,11 @@ class UnsubscribeByEmailTest extends AbstractTest
         $this->deleteTestList($test_list->id);
     }
 
-    public function testUnsubWithAccept()
+    /**
+     * @throws APIException
+     * @throws ValidationException
+     */
+    public function testUnsubWithAccept(): void
     {
         // Prepare test list
         $cl = new CreateList($this->api);
@@ -79,7 +89,11 @@ class UnsubscribeByEmailTest extends AbstractTest
         $this->deleteTestList($test_list->id);
     }
 
-    public function testUnsubWithoutAccept()
+    /**
+     * @throws APIException
+     * @throws ValidationException
+     */
+    public function testUnsubWithoutAccept(): void
     {
         // Prepare test list
         $cl = new CreateList($this->api);

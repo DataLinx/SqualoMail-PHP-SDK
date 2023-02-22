@@ -2,6 +2,7 @@
 
 namespace DataLinx\SqualoMail\Tests\Feature\Recipients;
 
+use DataLinx\SqualoMail\Exceptions\APIException;
 use DataLinx\SqualoMail\Exceptions\ValidationException;
 use DataLinx\SqualoMail\Requests\Lists\CreateList;
 use DataLinx\SqualoMail\Requests\Recipients\CreateRecipient;
@@ -11,7 +12,11 @@ use DataLinx\SqualoMail\Tests\AbstractTest;
 
 class GetRecipientListsTest extends AbstractTest
 {
-    public function testBasic()
+    /**
+     * @throws ValidationException
+     * @throws APIException
+     */
+    public function testBasic(): void
     {
         // Prepare test list
         $cl = new CreateList($this->api);
@@ -49,7 +54,11 @@ class GetRecipientListsTest extends AbstractTest
         $this->deleteTestList($test_list->id);
     }
 
-    public function testByEmail()
+    /**
+     * @throws ValidationException
+     * @throws APIException
+     */
+    public function testByEmail(): void
     {
         // Prepare test list
         $cl = new CreateList($this->api);
@@ -87,7 +96,7 @@ class GetRecipientListsTest extends AbstractTest
         $this->deleteTestList($test_list->id);
     }
 
-    public function testValidation()
+    public function testValidation(): void
     {
         $request = new GetRecipientLists($this->api);
 

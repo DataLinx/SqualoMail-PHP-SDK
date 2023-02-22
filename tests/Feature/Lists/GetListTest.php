@@ -2,19 +2,23 @@
 
 namespace DataLinx\SqualoMail\Tests\Feature\Lists;
 
+use DataLinx\SqualoMail\Exceptions\APIException;
 use DataLinx\SqualoMail\Exceptions\ValidationException;
 use DataLinx\SqualoMail\Requests\Lists\CreateList;
 use DataLinx\SqualoMail\Requests\Lists\GetList;
-use DataLinx\SqualoMail\Responses\EntityResponse;
 use DataLinx\SqualoMail\Tests\AbstractTest;
 
 class GetListTest extends AbstractTest
 {
-    public function testById()
+    /**
+     * @throws ValidationException
+     * @throws APIException
+     */
+    public function testById(): void
     {
         // Create test list
         $rq = new CreateList($this->api);
-        $rq->name = 'Test list '. rand();
+        $rq->name = 'Test list '. mt_rand();
         $rq->published = true;
         $rs = $rq->send();
 
@@ -25,7 +29,6 @@ class GetListTest extends AbstractTest
         $request->id = $test_list->id;
         $response = $request->send();
 
-        $this->assertInstanceOf(EntityResponse::class, $response);
         $this->assertTrue($response->isSuccessful());
         $this->assertNull($response->getErrorCode());
         $this->assertNull($response->getErrorMessage());
@@ -37,11 +40,15 @@ class GetListTest extends AbstractTest
         $this->deleteTestList($test_list->id);
     }
 
-    public function testByName()
+    /**
+     * @throws ValidationException
+     * @throws APIException
+     */
+    public function testByName(): void
     {
         // Create test list
         $rq = new CreateList($this->api);
-        $rq->name = 'Test list '. rand();
+        $rq->name = 'Test list '. mt_rand();
         $rq->published = true;
         $rs = $rq->send();
 
@@ -52,7 +59,6 @@ class GetListTest extends AbstractTest
         $request->name = $test_list->name;
         $response = $request->send();
 
-        $this->assertInstanceOf(EntityResponse::class, $response);
         $this->assertTrue($response->isSuccessful());
         $this->assertNull($response->getErrorCode());
         $this->assertNull($response->getErrorMessage());
@@ -64,7 +70,7 @@ class GetListTest extends AbstractTest
         $this->deleteTestList($test_list->id);
     }
 
-    public function testValidation()
+    public function testValidation(): void
     {
         $request = new GetList($this->api);
 

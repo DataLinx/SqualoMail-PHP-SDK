@@ -2,6 +2,7 @@
 
 namespace DataLinx\SqualoMail\Tests\Feature\Recipients;
 
+use DataLinx\SqualoMail\Exceptions\APIException;
 use DataLinx\SqualoMail\Exceptions\ValidationException;
 use DataLinx\SqualoMail\Requests\Recipients\CreateRecipient;
 use DataLinx\SqualoMail\Requests\Recipients\DeleteRecipient;
@@ -10,7 +11,11 @@ use DataLinx\SqualoMail\Tests\AbstractTest;
 
 class DeleteRecipientTest extends AbstractTest
 {
-    public function testBasic()
+    /**
+     * @throws ValidationException
+     * @throws APIException
+     */
+    public function testBasic(): void
     {
         // First, create the test object
         $test_email = rand() .'@example.com';
@@ -32,7 +37,7 @@ class DeleteRecipientTest extends AbstractTest
         $this->assertNull($response->getErrorMessage());
     }
 
-    public function testValidation()
+    public function testValidation(): void
     {
         $request = new DeleteRecipient($this->api);
 

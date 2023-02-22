@@ -2,6 +2,7 @@
 
 namespace DataLinx\SqualoMail\Tests\Feature\Recipients;
 
+use DataLinx\SqualoMail\Exceptions\APIException;
 use DataLinx\SqualoMail\Exceptions\ValidationException;
 use DataLinx\SqualoMail\Requests\Recipients\CreateRecipient;
 use DataLinx\SqualoMail\Requests\Recipients\UpdateRecipient;
@@ -10,10 +11,14 @@ use DataLinx\SqualoMail\Tests\AbstractTest;
 
 class UpdateRecipientTest extends AbstractTest
 {
-    public function testBasic()
+    /**
+     * @throws ValidationException
+     * @throws APIException
+     */
+    public function testBasic(): void
     {
         // First, create the test object
-        $test_email = rand() .'@example.com';
+        $test_email = mt_rand() .'@example.com';
 
         $cr = new CreateRecipient($this->api);
         $cr->email = $test_email;
@@ -48,14 +53,14 @@ class UpdateRecipientTest extends AbstractTest
         $this->assertNull($response->getErrorMessage());
         $this->assertIsObject($response->getRecipient());
 
-        $this->assertObjectHasAttribute('name', $response->getRecipient());
+        $this->assertTrue(property_exists($response->getRecipient(), 'name'), 'Recipient does not have a "name" property.');
         $this->assertEquals('Riccardo', $response->getRecipient()->name);
 
-        $this->assertObjectHasAttribute('surname', $response->getRecipient());
+        $this->assertTrue(property_exists($response->getRecipient(), 'surname'), 'Recipient does not have a "surname" property.');
         $this->assertEquals('Delonghi', $response->getRecipient()->surname);
 
         // Assert custom attributes
-        $this->assertObjectHasAttribute('customAttributes', $response->getRecipient());
+        $this->assertTrue(property_exists($response->getRecipient(), 'customAttributes'), 'Recipient does not have a "customAttributes" property.');
         $this->assertIsArray($response->getRecipient()->customAttributes);
 
         $custom_attrs = $response->getRecipient()->customAttributes;
@@ -68,7 +73,7 @@ class UpdateRecipientTest extends AbstractTest
         $this->assertEquals('Some other value', $attr['value']);
 
         // Assert tags
-        $this->assertObjectHasAttribute('tags', $response->getRecipient());
+        $this->assertTrue(property_exists($response->getRecipient(), 'tags'), 'Recipient does not have a "tags" property.');
         $this->assertIsArray($response->getRecipient()->tags);
 
         $tags = $response->getRecipient()->tags;
@@ -78,7 +83,7 @@ class UpdateRecipientTest extends AbstractTest
         $this->deleteTestRecipient($cr_r->getRecipient()->id);
     }
 
-    public function testValidation()
+    public function testValidation(): void
     {
         $request = new UpdateRecipient($this->api);
 

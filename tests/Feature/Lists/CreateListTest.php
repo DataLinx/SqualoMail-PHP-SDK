@@ -2,14 +2,18 @@
 
 namespace DataLinx\SqualoMail\Tests\Feature\Lists;
 
+use DataLinx\SqualoMail\Exceptions\APIException;
 use DataLinx\SqualoMail\Exceptions\ValidationException;
 use DataLinx\SqualoMail\Requests\Lists\CreateList;
-use DataLinx\SqualoMail\Responses\Lists\CreateListResponse;
 use DataLinx\SqualoMail\Tests\AbstractTest;
 
 class CreateListTest extends AbstractTest
 {
-    public function testBasic()
+    /**
+     * @throws ValidationException
+     * @throws APIException
+     */
+    public function testBasic(): void
     {
         $request = new CreateList($this->api);
         $request->name = 'PHPUnit Test list';
@@ -19,7 +23,6 @@ class CreateListTest extends AbstractTest
 
         $response = $request->send();
 
-        $this->assertInstanceOf(CreateListResponse::class, $response);
         $this->assertTrue($response->isSuccessful());
         $this->assertEquals(0, $response->getErrorCode());
         $this->assertNull($response->getErrorMessage());
@@ -27,10 +30,10 @@ class CreateListTest extends AbstractTest
 
         $list = $response->getList();
 
-        $this->assertObjectHasAttribute('name', $list);
+        $this->assertTrue(property_exists($list, 'name'), 'List does not have a "name" property.');
         $this->assertEquals('PHPUnit Test list', $list->name);
 
-        $this->assertObjectHasAttribute('listTags', $list);
+        $this->assertTrue(property_exists($list, 'listTags'), 'List does not have a "listTags" property.');
         $this->assertIsArray($list->listTags);
         $this->assertContains('Test tag', $list->listTags);
 
@@ -38,7 +41,7 @@ class CreateListTest extends AbstractTest
         $this->deleteTestList($list->id);
     }
 
-    public function testValidation()
+    public function testValidation(): void
     {
         $request = new CreateList($this->api);
 

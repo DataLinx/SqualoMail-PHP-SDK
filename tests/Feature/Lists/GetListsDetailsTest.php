@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace DataLinx\SqualoMail\Tests\Feature\Lists;
 
+use DataLinx\SqualoMail\Exceptions\APIException;
+use DataLinx\SqualoMail\Exceptions\ValidationException;
 use DataLinx\SqualoMail\Requests\Lists\CreateList;
 use DataLinx\SqualoMail\Requests\Lists\GetListsDetails;
 use DataLinx\SqualoMail\Requests\Recipients\CreateRecipient;
-use DataLinx\SqualoMail\Responses\CommonResponse;
 use DataLinx\SqualoMail\Tests\AbstractTest;
 
 class GetListsDetailsTest extends AbstractTest
 {
+    /**
+     * @throws ValidationException
+     * @throws APIException
+     */
     public function testBasic(): void
     {
         // Create test list
         $rq = new CreateList($this->api);
-        $rq->name = 'Test list '. rand();
+        $rq->name = 'Test list '. mt_rand();
         $rq->published = true;
         $rs = $rq->send();
 
@@ -24,7 +29,7 @@ class GetListsDetailsTest extends AbstractTest
 
         // Create test recipient
         $cr = new CreateRecipient($this->api);
-        $cr->email = rand() .'@example.com';
+        $cr->email = mt_rand() .'@example.com';
         $cr->list_ids[] = $test_list->id;
 
         $cr_r = $cr->send();
@@ -35,7 +40,6 @@ class GetListsDetailsTest extends AbstractTest
 
         $response = $request->send();
 
-        $this->assertInstanceOf(CommonResponse::class, $response);
         $this->assertTrue($response->isSuccessful());
 
         $this->assertIsArray($response->getParameter('lists'));
