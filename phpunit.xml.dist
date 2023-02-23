@@ -20,8 +20,10 @@
 	</coverage>
 	<php>
 		<!-- You must set this value to run the tests! -->
-		<env name="squalomail.api_key" value=""/>
+        <!--
+		<env name="SQUALOMAIL_API_KEY" value=""/>
+		-->
 		<!-- Enable cURL verbose request dump to build/curl.log -->
-		<env name="squalomail.debug" value="false"/>
+		<env name="SQUALOMAIL_DEBUG" value="false"/>
 	</php>
 </phpunit>

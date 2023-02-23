@@ -17,7 +17,7 @@ class AbstractTest extends TestCase
     {
         parent::setUp();
 
-        $this->api = new API(getenv('squalomail.api_key'));
+        $this->api = new API(getenv('SQUALOMAIL_API_KEY'));
     }
 
     /**

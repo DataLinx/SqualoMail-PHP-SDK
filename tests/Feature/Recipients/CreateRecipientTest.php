@@ -21,7 +21,7 @@ class CreateRecipientTest extends AbstractTest
     {
         $this->assertIsObject($this->api);
         $this->assertInstanceOf(API::class, $this->api);
-        $this->assertEquals(getenv('squalomail.api_key'), $this->api->api_key);
+        $this->assertEquals(getenv('SQUALOMAIL_API_KEY'), $this->api->api_key);
 
         $test_email = rand() .'@example.com';
 

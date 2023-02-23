@@ -82,7 +82,7 @@ class API
             CURLOPT_TIMEOUT => 60,
         ]);
 
-        if (getenv('squalomail.debug')) {
+        if (getenv('SQUALOMAIL_DEBUG')) {
             $fp = fopen('build/curl.log', 'w');
             curl_setopt($ch, CURLOPT_VERBOSE, 1);
             curl_setopt($ch, CURLOPT_STDERR, $fp);
