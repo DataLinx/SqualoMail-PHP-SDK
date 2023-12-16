@@ -1,7 +1,14 @@
 {
     "name": "datalinx/squalomail-php-sdk",
     "description": "PHP SDK for SqualoMail",
-    "keywords": ["squalomail", "api", "webservice", "php", "sdk", "slovenia"],
+    "keywords": [
+        "squalomail",
+        "api",
+        "webservice",
+        "php",
+        "sdk",
+        "slovenia"
+    ],
     "homepage": "https://github.com/datalinx/squalomail-php-sdk",
     "type": "library",
     "license": "MIT",
